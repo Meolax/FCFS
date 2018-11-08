@@ -11,9 +11,9 @@ using FCFS.Models;
 
 namespace FCFS
 {
-    public partial class Form1 : Form
+    public partial class Main : Form
     {
-        public Form1 ()
+        public Main ()
         {
             InitializeComponent();
         }
@@ -38,14 +38,14 @@ namespace FCFS
         {
             int index = e.RowIndex;
             string indexStr = (index + 1).ToString();
-            object header = this.dataGridView.Rows[index].HeaderCell.Value;
+            object header = this.dataGridMain.Rows[index].HeaderCell.Value;
             if (header == null || header.Equals(indexStr))
-                this.dataGridView.Rows[index].Cells[0].Value = indexStr;
+                this.dataGridMain.Rows[index].Cells[0].Value = indexStr;
         }
 
         private void checkTableToolStripMenuItem_Click (object sender, EventArgs e)
         {
-            CheckTable(dataGridView);
+            CheckTable(dataGridMain);
         }
 
         #region CheckTable
@@ -94,9 +94,10 @@ namespace FCFS
         }
         #endregion
 
+        #region ReadProceses
         private List<Proces> readProcesesFromTable (DataGridView dataGrid )
         {
-            if (CheckTable(dataGridView))
+            if (CheckTable(dataGridMain))
             {
                 List<Proces> proceses = new List<Proces>();
                 int RowsCount = dataGrid.Rows.Count == 1 ? 1 : dataGrid.Rows.Count - 1;
@@ -123,29 +124,84 @@ namespace FCFS
         {
             return Convert.ToDouble(data.Value.ToString());
         }
+        #endregion
 
         private void executeToolStripMenuItem_Click (object sender, EventArgs e)
         {
-            Executer executer = new Executer(readProcesesFromTable(dataGridView));
-            executer.Execute();
-            UpdateTableFromExecuter(dataGridView, executer);
-            executer.Dispose();
+            try
+            {
+                Executer executer = new Executer(readProcesesFromTable(dataGridMain));
+                Proces.TcList.Clear();
+                executer.Execute();
+                UpdateTableFromExecuter(dataGridMain, executer);
+            } catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                Proces.TcList.Clear();
+            }
         }
 
         private void UpdateTableFromExecuter (DataGridView dataGrid, Executer executer)
         {
+            UpdateColumsDiagram(executer.TimeExect);
             for (int i=0; i<executer.proceses.Count; i++)
             {
                 UpdateRowFromProces(dataGrid.Rows[executer.proceses[i].ID - 1], executer.proceses[i]);
             }
+            UpdateAvgTimeIndicators(executer);
         }
 
+
+        private void UpdateAvgTimeIndicators (Executer executer)
+        {
+            dataGridAvgTime.Rows.Clear();
+            dataGridAvgTime.Rows.Add();
+            dataGridAvgTime.Rows[0].Cells[0].Value = executer.AvgWaitTime;
+            dataGridAvgTime.Rows[0].Cells[1].Value = executer.AvgExectTime;
+        }
         private void UpdateRowFromProces (DataGridViewRow row, Proces proces)
         {
             row.Cells["WaitingTime"].Value = proces.WaitTime;
             row.Cells["ExectTime"].Value = proces.ExectTime;
+            DrawDiagramProces(proces);
         }
 
+        private void DrawDiagramProces (Proces proces)
+        {
+            if (proces.WaitTime != 0)
+            {
+                DrawCell(proces.ID, Convert.ToInt32(proces.Tc), Convert.ToInt32(proces.WaitTime+proces.Tc), Color.Red);
+            }
+            DrawCell(proces.ID, Convert.ToInt32(proces.ExectTime), Convert.ToInt32(proces.ExectTime + proces.Te), Color.Green);
+        }
 
+        public void DrawCell (int ID, int from, int to, Color color)
+        {
+            for (int i = from;  i < to; i++)
+            {
+                dataGridMain.Rows[ID - 1].Cells[i+5].Style.BackColor = color;
+                dataGridMain.Rows[ID - 1].Cells[i+5].Style.ForeColor = color;
+                dataGridMain.Rows[ID - 1].Cells[i+5].Style.SelectionBackColor = color;
+                dataGridMain.Rows[ID - 1].Cells[i+5].Style.SelectionForeColor = color;
+            }
+        }
+        private void UpdateColumsDiagram (double Time)
+        {
+            ClearColumns();
+            int count = Convert.ToInt32(Time);
+            for (int i=0; i<count; i++)
+            {
+                dataGridMain.Columns.Add(i.ToString(), i.ToString());
+                dataGridMain.Columns[i.ToString()].Width = dataGridMain.Rows[1].Height;
+            }
+        }
+
+        private void ClearColumns ()
+        {
+            while (dataGridMain.Columns.Count > 5)
+            {
+                dataGridMain.Columns.RemoveAt(5);
+            }
+        }
     }
 }

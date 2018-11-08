@@ -9,23 +9,29 @@ namespace FCFS.Models
     public class Proces
     {
         private readonly static string ArgumentError = "Argument error!";
+
         public int ID { get; }
         public double Tc { get; }
+
         public double Te { get; }
-        private List<double> TcList = new List<double>();
+
+        public static List<double> TcList = new List<double>();
+
         public double WaitTime { get; set; }
+
         public double ExectTime { get; set; }
+
         public Proces (int ID, double Tc, double Te)
         {
             if (Tc < 0 || Te <= 0 || TcList.Contains(Tc))
             {
-                throw new Exception(ArgumentError);
+                throw new Exception($"public Proces (int {ID}, double {Tc}, double {Te}) -> "+ArgumentError);
             }
             this.ID = ID;
-            this.Tc = Tc;
+            this.Tc = Tc+1;
             TcList.Add(Tc);
             this.Te = Te;
-        }
+        }        
     }
 
     public class ProcComarer: IComparer<Proces>
