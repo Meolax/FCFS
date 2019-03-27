@@ -53,7 +53,7 @@ namespace FCFS.Models
         public Executer (List<Proces> proceses)
         {
             this.proceses = proceses;
-            proceses.Sort(new ProcComarerByTc());
+            proceses.Sort(new ProcComparerByTc());
         }
 
         public void Execute ()
