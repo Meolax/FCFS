@@ -34,11 +34,13 @@ namespace FCFS.Models
         }        
     }
 
-    public class ProcComarer: IComparer<Proces>
+    public class ProcComarerByTc: IComparer<Proces>
     {
         public int Compare (Proces x, Proces y)
         {
             return x.Tc > y.Tc ? 1 : x.Tc < y.Tc ? -1 : 0;
         }
     }
+
+
 }
