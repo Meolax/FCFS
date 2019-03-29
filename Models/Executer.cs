@@ -83,7 +83,7 @@ namespace FCFS.Models
 
         private void ExecuteProces (ref List<Proces> proceses)
         {
-            proceses.Sort(new ProcComparerByPP());
+            
             if (proceses.Count > 1)
             {
                 for (int i = 1; i < proceses.Count; i++)
@@ -102,7 +102,7 @@ namespace FCFS.Models
                     NonCompleteProceses -= 1;
                     CompleteProceses.Add(proceses[0]);
                     proceses.RemoveAt(0);
-                    
+                    proceses.Sort(new ProcComparerByPP());
                 }   
             }
             
