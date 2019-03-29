@@ -170,12 +170,6 @@ namespace FCFS
 
         private void DrawDiagramProces (Proces proces)
         {
-            /*
-            if (proces.WaitTime != 0)
-            {
-                DrawCell(proces.ID, Convert.ToInt32(proces.Tc), Convert.ToInt32(proces.WaitTime+proces.Tc), Color.Red);
-            }
-            DrawCell(proces.ID, Convert.ToInt32(proces.ExectTime), Convert.ToInt32(proces.ExectTime + proces.Te), Color.Green);*/
             for (int i= 0; i< proces.History.Count; i++)
             {
                 DrawCell(proces.ID, proces.Tc+i, proces.Tc+i+1, proces.History[i] == 1 ? Color.Green : Color.Red);
