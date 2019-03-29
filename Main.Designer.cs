@@ -29,17 +29,18 @@
         private void InitializeComponent ()
         {
             this.dataGridMain = new System.Windows.Forms.DataGridView();
-            this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Tc = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Te = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.WaitingTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ExectTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.executeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.checkTableToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dataGridAvgTime = new System.Windows.Forms.DataGridView();
             this.Tw = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Tex = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Tc = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Te = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.PP = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.WaitingTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ExectTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridMain)).BeginInit();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridAvgTime)).BeginInit();
@@ -52,6 +53,7 @@
             this.ID,
             this.Tc,
             this.Te,
+            this.PP,
             this.WaitingTime,
             this.ExectTime});
             this.dataGridMain.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -61,38 +63,6 @@
             this.dataGridMain.Size = new System.Drawing.Size(683, 495);
             this.dataGridMain.TabIndex = 0;
             this.dataGridMain.RowPrePaint += new System.Windows.Forms.DataGridViewRowPrePaintEventHandler(this.dataGridView_RowPrePaint);
-            // 
-            // ID
-            // 
-            this.ID.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.ID.HeaderText = "ID";
-            this.ID.Name = "ID";
-            this.ID.ReadOnly = true;
-            this.ID.Width = 50;
-            // 
-            // Tc
-            // 
-            this.Tc.HeaderText = "Tc";
-            this.Tc.Name = "Tc";
-            // 
-            // Te
-            // 
-            this.Te.HeaderText = "Te";
-            this.Te.Name = "Te";
-            // 
-            // WaitingTime
-            // 
-            this.WaitingTime.HeaderText = "WaitingTime";
-            this.WaitingTime.Name = "WaitingTime";
-            this.WaitingTime.ReadOnly = true;
-            // 
-            // ExectTime
-            // 
-            this.ExectTime.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            this.ExectTime.HeaderText = "Exect Time";
-            this.ExectTime.Name = "ExectTime";
-            this.ExectTime.ReadOnly = true;
-            this.ExectTime.Width = 106;
             // 
             // menuStrip1
             // 
@@ -154,7 +124,44 @@
             this.Tex.ReadOnly = true;
             this.Tex.Width = 76;
             // 
-            // Form1
+            // ID
+            // 
+            this.ID.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.ID.HeaderText = "ID";
+            this.ID.Name = "ID";
+            this.ID.ReadOnly = true;
+            this.ID.Width = 50;
+            // 
+            // Tc
+            // 
+            this.Tc.HeaderText = "Tc";
+            this.Tc.Name = "Tc";
+            // 
+            // Te
+            // 
+            this.Te.HeaderText = "Te";
+            this.Te.Name = "Te";
+            // 
+            // PP
+            // 
+            this.PP.HeaderText = "PP";
+            this.PP.Name = "PP";
+            // 
+            // WaitingTime
+            // 
+            this.WaitingTime.HeaderText = "WaitingTime";
+            this.WaitingTime.Name = "WaitingTime";
+            this.WaitingTime.ReadOnly = true;
+            // 
+            // ExectTime
+            // 
+            this.ExectTime.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.ExectTime.HeaderText = "Exect Time";
+            this.ExectTime.Name = "ExectTime";
+            this.ExectTime.ReadOnly = true;
+            this.ExectTime.Width = 106;
+            // 
+            // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -163,7 +170,7 @@
             this.Controls.Add(this.dataGridAvgTime);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
-            this.Name = "Form1";
+            this.Name = "Main";
             this.Text = "Form1";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridMain)).EndInit();
             this.menuStrip1.ResumeLayout(false);
@@ -180,14 +187,15 @@
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem executeToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem checkTableToolStripMenuItem;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ID;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Tc;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Te;
-        private System.Windows.Forms.DataGridViewTextBoxColumn WaitingTime;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ExectTime;
         private System.Windows.Forms.DataGridView dataGridAvgTime;
         private System.Windows.Forms.DataGridViewTextBoxColumn Tw;
         private System.Windows.Forms.DataGridViewTextBoxColumn Tex;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Tc;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Te;
+        private System.Windows.Forms.DataGridViewTextBoxColumn PP;
+        private System.Windows.Forms.DataGridViewTextBoxColumn WaitingTime;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ExectTime;
     }
 }
 

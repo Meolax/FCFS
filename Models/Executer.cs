@@ -35,7 +35,6 @@ namespace FCFS.Models
             }
         }
         private int NonCompleteProceses = 0;
-        //public double TimeExect { get; set; } = 0;
         private int CurrentTime = 0;
         public int EndTime
         {
@@ -84,6 +83,7 @@ namespace FCFS.Models
 
         private void ExecuteProces (ref List<Proces> proceses)
         {
+            proceses.Sort(new ProcComparerByPP());
             if (proceses.Count > 1)
             {
                 for (int i = 1; i < proceses.Count; i++)
@@ -93,6 +93,7 @@ namespace FCFS.Models
             }
             if (proceses.Count > 0)
             {
+                
                 proceses[0].LeftTime -= 1;
                 proceses[0].History.Add(1);
                 if (proceses[0].EndExecuting)
@@ -101,7 +102,7 @@ namespace FCFS.Models
                     NonCompleteProceses -= 1;
                     CompleteProceses.Add(proceses[0]);
                     proceses.RemoveAt(0);
-                    proceses.Sort(new ProcComparerByLeftTime());
+                    
                 }   
             }
             

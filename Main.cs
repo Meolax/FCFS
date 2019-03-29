@@ -73,7 +73,7 @@ namespace FCFS
         private bool CheckRow (DataGridViewRow row)
         {
             bool result = false;
-            if (ValidateCell (row.Cells[1]) && ValidateCell(row.Cells[2]))
+            if (ValidateCell (row.Cells[1]) && ValidateCell(row.Cells[2]) && ValidateCell(row.Cells[3]))
             {
                 return true;
             }
@@ -112,7 +112,7 @@ namespace FCFS
 
         private Proces readProceseFromRow (DataGridViewRow row)
         {
-            return new Proces(GetIDFromRow(row.Cells[0]), GetTFromRow(row.Cells[1]), GetTFromRow(row.Cells[2]));
+            return new Proces(GetIDFromRow(row.Cells[0]), GetTFromRow(row.Cells[1]), GetTFromRow(row.Cells[2]), GetTFromRow(row.Cells[3]));
         }
 
         private int GetIDFromRow (DataGridViewCell data)
@@ -181,10 +181,10 @@ namespace FCFS
         {
             for (int i = from;  i < to; i++)
             {
-                dataGridMain.Rows[ID - 1].Cells[i+5].Style.BackColor = color;
-                dataGridMain.Rows[ID - 1].Cells[i+5].Style.ForeColor = color;
-                dataGridMain.Rows[ID - 1].Cells[i+5].Style.SelectionBackColor = color;
-                dataGridMain.Rows[ID - 1].Cells[i+5].Style.SelectionForeColor = color;
+                dataGridMain.Rows[ID - 1].Cells[i+6].Style.BackColor = color;
+                dataGridMain.Rows[ID - 1].Cells[i+6].Style.ForeColor = color;
+                dataGridMain.Rows[ID - 1].Cells[i+6].Style.SelectionBackColor = color;
+                dataGridMain.Rows[ID - 1].Cells[i+6].Style.SelectionForeColor = color;
             }
         }
         private void UpdateColumsDiagram (int count)
@@ -199,9 +199,9 @@ namespace FCFS
 
         private void ClearColumns ()
         {
-            while (dataGridMain.Columns.Count > 5)
+            while (dataGridMain.Columns.Count > 6)
             {
-                dataGridMain.Columns.RemoveAt(5);
+                dataGridMain.Columns.RemoveAt(6);
             }
         }
     }

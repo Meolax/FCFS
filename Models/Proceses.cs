@@ -13,6 +13,7 @@ namespace FCFS.Models
         public int ID { get; }
         public int Tc { get; }
         public int Te { get; }
+        public int PP { get; }
         public static List<int> TcList = new List<int>();
         public int LeftTime { get; set; }
         public int EndTime { get; set; }
@@ -27,7 +28,7 @@ namespace FCFS.Models
             }
         }
 
-        public Proces (int ID, int Tc, int Te)
+        public Proces (int ID, int Tc, int Te, int PP)
         {
             if (Tc < 0 || Te <= 0 || TcList.Contains(Tc))
             {
@@ -35,6 +36,7 @@ namespace FCFS.Models
             }
             this.ID = ID;
             this.Tc = Tc+1;
+            this.PP = PP;
             TcList.Add(Tc);
             this.Te = Te;
             LeftTime = Te;
@@ -54,6 +56,14 @@ namespace FCFS.Models
         public int Compare(Proces x, Proces y)
         {
             return x.LeftTime > y.LeftTime ? 1 : x.LeftTime < y.LeftTime ? -1 : 0;
+        }
+    }
+
+    public class ProcComparerByPP : IComparer<Proces>
+    {
+        public int Compare(Proces x, Proces y)
+        {
+            return x.PP > y.PP ? 1 : x.PP < y.PP ? -1 : 0;
         }
     }
 }
