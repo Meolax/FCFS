@@ -63,7 +63,7 @@ namespace FCFS
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.Message);
+                    MessageBox.Show(ex.Message+"Check Table");
                     return false;
                 }               
             }
@@ -120,14 +120,16 @@ namespace FCFS
             return Convert.ToInt32(data.Value.ToString());
         }
 
-        private double GetTFromRow (DataGridViewCell data)
+        private int GetTFromRow (DataGridViewCell data)
         {
-            return Convert.ToDouble(data.Value.ToString());
+            return Convert.ToInt32(data.Value.ToString());
         }
         #endregion
 
         private void executeToolStripMenuItem_Click (object sender, EventArgs e)
         {
+            
+            
             try
             {
                 Executer executer = new Executer(readProcesesFromTable(dataGridMain));
@@ -143,10 +145,10 @@ namespace FCFS
 
         private void UpdateTableFromExecuter (DataGridView dataGrid, Executer executer)
         {
-            UpdateColumsDiagram(executer.TimeExect);
-            for (int i=0; i<executer.proceses.Count; i++)
+            UpdateColumsDiagram(executer.EndTime);
+            for (int i=0; i<executer.CompleteProceses.Count; i++)
             {
-                UpdateRowFromProces(dataGrid.Rows[executer.proceses[i].ID - 1], executer.proceses[i]);
+                UpdateRowFromProces(dataGrid.Rows[executer.CompleteProceses[i].ID - 1], executer.CompleteProceses[i]);
             }
             UpdateAvgTimeIndicators(executer);
         }
@@ -168,11 +170,17 @@ namespace FCFS
 
         private void DrawDiagramProces (Proces proces)
         {
+            /*
             if (proces.WaitTime != 0)
             {
                 DrawCell(proces.ID, Convert.ToInt32(proces.Tc), Convert.ToInt32(proces.WaitTime+proces.Tc), Color.Red);
             }
-            DrawCell(proces.ID, Convert.ToInt32(proces.ExectTime), Convert.ToInt32(proces.ExectTime + proces.Te), Color.Green);
+            DrawCell(proces.ID, Convert.ToInt32(proces.ExectTime), Convert.ToInt32(proces.ExectTime + proces.Te), Color.Green);*/
+            for (int i= 0; i< proces.History.Count; i++)
+            {
+                DrawCell(proces.ID, proces.Tc+i, proces.Tc+i+1, proces.History[i] == 1 ? Color.Green : Color.Red);
+            }
+            
         }
 
         public void DrawCell (int ID, int from, int to, Color color)
@@ -185,10 +193,9 @@ namespace FCFS
                 dataGridMain.Rows[ID - 1].Cells[i+5].Style.SelectionForeColor = color;
             }
         }
-        private void UpdateColumsDiagram (double Time)
+        private void UpdateColumsDiagram (int count)
         {
             ClearColumns();
-            int count = Convert.ToInt32(Time);
             for (int i=0; i<count; i++)
             {
                 dataGridMain.Columns.Add(i.ToString(), i.ToString());

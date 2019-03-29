@@ -14,10 +14,18 @@ namespace FCFS.Models
         public int Tc { get; }
         public int Te { get; }
         public static List<int> TcList = new List<int>();
+        public int LeftTime { get; set; }
         public int EndTime { get; set; }
-        public int LeftTime { get; set; } 
-        public int WaitTime { get; set; }
-        public int ExectTime { get; set; }
+        public int WaitTime { get {return EndTime - Tc - Te; } }
+        public int ExectTime { get { return EndTime - Tc; } }
+        public List<int> History = new List<int>();
+        public bool EndExecuting
+        {
+            get
+            {
+                return LeftTime > 0 ? false : true;
+            }
+        }
 
         public Proces (int ID, int Tc, int Te)
         {
@@ -48,6 +56,4 @@ namespace FCFS.Models
             return x.LeftTime > y.LeftTime ? 1 : x.LeftTime < y.LeftTime ? -1 : 0;
         }
     }
-
-
 }
